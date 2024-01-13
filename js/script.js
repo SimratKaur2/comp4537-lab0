@@ -61,19 +61,21 @@ class ButtonGame {
       // Define a fixed Y position to move buttons down from the top
       const startY = 300; // For example, 100 pixels from the top
 
-      for (let i = 0; i < num; i++) {
-        const button = new Button(
-            startingX + i * (10 * 16), // Position buttons in a row horizontally
-            startY, // Use the fixed Y position to move buttons down
-            this.getRandomColor(),
-            `${i + 1}`
-        );
-        button.createButton();
-        this.buttons.push(button);
-      }
+      setTimeout(() => {
+        for (let i = 0; i < num; i++) {
+          const button = new Button(
+              startingX + i * (10 * 16), // Position buttons in a row horizontally
+              startY, // Use the fixed Y position to move buttons down
+              this.getRandomColor(),
+              `${i + 1}`
+          );
+          button.createButton();
+          this.buttons.push(button);
+        }
 
-      // Wait for 'num' seconds before scrambling buttons
-      setTimeout(() => this.scatterButtons(num), num * 1000);
+        // Wait for 'num' seconds before scrambling buttons
+        setTimeout(() => this.scatterButtons(num), num * 1000);
+      },num*1000);
     } else {
       alert(messages.enterNumber);
     }
