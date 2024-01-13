@@ -13,11 +13,9 @@ class Button {
 
   createButton() {
     this.element = document.createElement("button");
-    this.element.style.height = "5em";
-    this.element.style.width = "10em";
+    this.element.className = 'game-button';
     this.element.style.backgroundColor = this.color;
     this.element.innerText = this.text;
-    this.element.style.position = "absolute";
     this.element.style.left = `${this.x}px`;
     this.element.style.top = `${this.y}px`;
     document.getElementById("buttonContainer").appendChild(this.element);
