@@ -1,5 +1,7 @@
 
 import messages from '../lang/messages/en/user.js';
+
+//Button class representing each button in our game.
 class Button {
   constructor(x, y, color, text) {
     this.x = x;
@@ -9,26 +11,26 @@ class Button {
     this.element = null;
   }
 
-  //essential functions
-
+//Method to create a button element and add it to the DOM
   createButton() {
     this.element = document.createElement("button");
-    this.element.className = 'game-button';
+    this.element.className = 'game-button';   //assigning a class for adding styling to the button
     this.element.style.backgroundColor = this.color;
     this.element.innerText = this.text;
     this.element.style.left = `${this.x}px`;
     this.element.style.top = `${this.y}px`;
-    document.getElementById("buttonContainer").appendChild(this.element);
-    //the above line adds the created button element( this.element) to the
-    //html element with the ID 'buttonContainer'
+    document.getElementById("buttonContainer").appendChild(this.element); //adds the created button element( this.element) to the
+                                                                                    //html element with the ID 'buttonContainer'
   }
 
+  //Method to move the button to a new location
   moveButton(newX, newY) {
     this.element.style.left = `${newX}px`;
     this.element.style.top = `${newY}px`;
   }
 }
 
+//ButtonGame class that represents the game logic
 class ButtonGame {
   constructor() {
     this.buttons = [];
@@ -38,32 +40,33 @@ class ButtonGame {
 
     this.goButton.addEventListener("click", () => this.createButtons());
     //here "this" refers to an instance of the ButtonGame
-    //this attaches an event listener to the 'Go' button so
+    //the line above  attaches an event listener to the 'Go' button so
     //when the button is clicked, it calls the create buttons
 
-    //this method will create the specifies number of buttons based
+    //this method will create the specified number of buttons based
     // on the input value provided by the user.
   }
 
+  //Method to create buttons based on the user input
   createButtons() {
     const num = parseInt(this.numInput.value);
 
     if (num >= 3 && num <= 7) {
       this.clearButtons();
 
-      // Calculate the total width of all buttons to center them
-      const totalWidth = num * 10 * 16; // 10em width per button (assuming 1em = 16px)
-      let startingX = (window.innerWidth - totalWidth) / 2; // Center buttons horizontally
-      startingX = startingX < 0 ? 0 : startingX; // Make sure it's not negative
+      // Calculating the total width of all buttons to center them
+      const totalWidth = num * 10 * 16;                      // 10em width per button
+      let startingX = (window.innerWidth - totalWidth) / 2;  // Center buttons horizontally
+      startingX = startingX < 0 ? 0 : startingX;                      // Making sure it's not negative
 
-      // Define a fixed Y position to move buttons down from the top
-      const startY = 300; // For example, 100 pixels from the top
+      // Defining a fixed Y position to move buttons down from the top
+      const startY = 300;
 
       setTimeout(() => {
         for (let i = 0; i < num; i++) {
           const button = new Button(
-              startingX + i * (10 * 16), // Position buttons in a row horizontally
-              startY, // Use the fixed Y position to move buttons down
+              startingX + i * (10 * 16), // Positioning buttons in a row horizontally
+              startY,
               this.getRandomColor(),
               `${i + 1}`
           );
@@ -71,7 +74,7 @@ class ButtonGame {
           this.buttons.push(button);
         }
 
-        // Wait for 'num' seconds before scrambling buttons
+        // Waiting for 'num' seconds before scrambling buttons
         setTimeout(() => this.scatterButtons(num), num * 1000);
       },num*1000);
     } else {
@@ -79,24 +82,26 @@ class ButtonGame {
     }
   }
 
+  //Method to clear all buttons from the screen
   clearButtons() {
     this.buttonContainer.innerHTML = "";
     this.buttons = [];
   }
 
+  //Method to scatter buttons randomly n times.
   scatterButtons(num) {
-    let scatterCount = 0; // Counter to track the number of scatter iterations
+    let scatterCount = 0; //tracks the number of scatter iterations
 
     const scatterInterval = setInterval(() => {
       const scatterPromises = [];
 
-      // Create promises to move each button
+      // Creating promises to move each button
       for (let i = 0; i < num; i++) {
         const button = this.buttons[i];
         const newX = Math.random() * (window.innerWidth - 100);
         const newY = Math.random() * (window.innerHeight - 50);
 
-        // Create a promise to move each button
+        // Creating a promise to move each button
         const movePromise = new Promise((resolve) => {
           button.moveButton(newX, newY);
           resolve();
@@ -120,14 +125,12 @@ class ButtonGame {
   }
 
 
-//function to hide the button number after
-  //the scattering is done
+//Method to hide the button number after the scattering is done
 removeButtonText() {
     this.buttons.forEach(button => button.element.innerText = " ");
   }
 
-  //function to enable interaction with the buttons
-  //to enable the memory logic in the game.
+  //Method to enable clicking on buttons to enable the memory logic in the game.
   enableButtonInteraction() {
     let clickCount = 0;
 
@@ -151,7 +154,7 @@ removeButtonText() {
     })
   }
 
-  //function for revealing the correct order
+  //Method for revealing the correct order after the game ends
   revealCorrectOrder() {
     this.buttons.forEach(button => {
       button.element.innerText = button.text;
@@ -159,6 +162,7 @@ removeButtonText() {
     })
   }
 
+  //Method to generate random colors for the buttons
   getRandomColor() {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -169,4 +173,5 @@ removeButtonText() {
   }
 }
 
+//Instantiating the game
 const game = new ButtonGame();
