@@ -1,0 +1,5 @@
+{
+  "routes": [
+    { "src": "/COMP4537/labs/0/(.*)", "dest": "/index.html" }
+  ]
+}
