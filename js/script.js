@@ -47,38 +47,6 @@ class ButtonGame {
     // on the input value provided by the user.
   }
 
-  //essential functions
-
-  // createButtons() {
-  //   const num = parseInt(this.numInput.value);
-  //
-  //   if (num >= 3 && num <= 7) {
-  //     this.clearButtons();
-  //     let buttonWidth = 10; //Width of each button in em
-  //     const buttonMarginEm = 1; // Margin between buttons in em
-  //     let startX = 0; // start at the left edge of the container
-  //     // let startY = 50; // Starting Y position, adjust as necessary
-  //
-  //     //creating the buttons in a row
-  //     for (let i = 0; i < num; i++) {
-  //       const xPosition = startX + (buttonWidthEm + buttonMarginEm) * i * 16; // Convert em to pixels
-  //       const button = new Button(
-  //           xPosition,
-  //           0, // Y position can be 0 since they are in a row
-  //           this.getRandomColor(),
-  //           `${i + 1}`
-  //       );
-  //       button.createButton();
-  //       this.button.push(button);
-  //     }
-  //
-  //     //Wait for 'num' seconds befroe scrambling buttons
-  //     setTimeout(() => this.scatterButtons(num), num * 1000);
-  //   } else {
-  //   alert(messages.enterNumber);
-  //   }
-  // }
-
   createButtons() {
     const num = parseInt(this.numInput.value);
 
@@ -110,27 +78,6 @@ class ButtonGame {
       alert(messages.enterNumber);
     }
   }
-
-
-  //     // Wait for 'num' seconds before creating buttons
-  //     setTimeout(() => {
-  //       for (let i = 0; i < num; i++) {
-  //         const button = new Button(
-  //             Math.random() * (window.innerWidth - 100),
-  //             Math.random() * (window.innerHeight - 50),
-  //             this.getRandomColor(),
-  //             `${i + 1}`
-  //         );
-  //         button.createButton();
-  //         this.buttons.push(button);
-  //       }
-  //       setTimeout(() => this.scatterButtons(num), num * 1000);
-  //     }, num * 1000);
-  //   } else {
-  //     alert(messages.enterNumber);
-  //   }
-  // }
-
 
   clearButtons() {
     this.buttonContainer.innerHTML = "";
