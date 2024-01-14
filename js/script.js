@@ -47,7 +47,12 @@ class ButtonGame {
     // on the input value provided by the user.
   }
 
-  //Method to create buttons based on the user input
+  /**
+   * ChatGPT Assistance Disclosure:
+   * The createButtons function was developed with the assistance of ChatGPT, an AI language model by OpenAI.
+   * This method to create buttons based on the user input
+   */
+
   createButtons() {
     const num = parseInt(this.numInput.value);
 
@@ -88,7 +93,11 @@ class ButtonGame {
     this.buttons = [];
   }
 
-  //Method to scatter buttons randomly n times.
+  /**
+   * ChatGPT Assistance Disclosure:
+   * The scatterButtons function was developed with the assistance of ChatGPT, an AI language model by OpenAI.
+   * This method to scatter buttons randomly n times.
+   */
   scatterButtons(num) {
     let scatterCount = 0; //tracks the number of scatter iterations
 
